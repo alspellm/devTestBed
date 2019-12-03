@@ -28,6 +28,9 @@ int main() {
     std::string graphname_m = "mean_"  + histoname;
     std::string graphname_w = "width_" + histoname;
 
+    //TCanvas* canvas = new TCanvas(ih2d);
+    //canvas->cd();
+
     TH1F* histoMean  = new TH1F(graphname_m.c_str(),graphname_m.c_str(), histos2d[histos2dk[ih2d]]->GetNbinsX(),histos2d[histos2dk[ih2d]]->GetXaxis()->GetXmin(),histos2d[histos2dk[ih2d]]->GetXaxis()->GetXmax());
     outfile->cd();
   //  histos2d[histos2dk.at(ih2d)]->Write();
@@ -36,8 +39,12 @@ int main() {
 
     HistogramHelpers::profileYwithIterativeGaussFit(histos2d[histos2dk[ih2d]],histoMean,histoWidth,binning,0);
     outfile->cd();
+    histos2d[histos2dk[ih2d]]->Write();
+    //histoMean->Draw("same");
+    //histoWidth->Draw();
     histoMean ->Write(graphname_m.c_str());
     histoWidth->Write(graphname_w.c_str());
+    //canvas->Write();
 
   }
 
